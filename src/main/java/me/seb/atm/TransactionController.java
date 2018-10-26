@@ -16,6 +16,8 @@ import javax.websocket.server.PathParam;
 public class TransactionController {
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    Accountservice accountservice;
 
     @RequestMapping("/")
     public String homePage(Model model){
@@ -45,32 +47,36 @@ public class TransactionController {
         return "historyform";
     }
 
-    @RequestMapping("/withdraw/{id}")
+    @GetMapping("/withdraw/{id}")
     public String withdrawal(@PathVariable("id") long id,Model model){
         model.addAttribute("account", accountRepository.findById(id));
-
         return "withdrawalform";
     }
-    @GetMapping("/withdrawprocess/{id}")
-    public String processwithdraw(@PathVariable("id") long id,Model model){
-        Account account=accountRepository.findById(id).get();
-        double currentBalance=account.getBalance()-account.getAmount();
-        account.setBalance(currentBalance);
-                 return "redirect:/";
+    @PostMapping("/withdrawprocess")
+    public String processwithdraw(Account account, double amount, Model model){
+
+        model.addAttribute("amount",amount);
+        account.setAmount(amount);
+        double balance=(account.getBalance()-account.getAmount());
+        account.setBalance(balance);
+           return "redirect:/";
     }
 
-    @RequestMapping("/deposite/{id}")
+    @GetMapping("/deposite/{id}")
     public String deposite(@PathVariable("id") long id,Model model){
     model.addAttribute("account", accountRepository.findById(id));
         return "depositeform";
     }
-    @GetMapping("/depositeprocess/{id}")
-    public String processdeposite(@PathVariable("id") long id,Model model){
-        Account account=accountRepository.findById(id).get();
-        double currentBalance=account.getBalance()+ account.getAmount();
-        account.setBalance(currentBalance);
+    @PostMapping("/depositeprocess")
+    public String processdeposite(Account account,double amount,Model model){
+
+        model.addAttribute("amount",amount);
+        account.setAmount(amount);
+        double balance=(account.getBalance()+account.getAmount());
+        account.setBalance(balance);
         return "redirect:/";
+    }
     }
 
 
-}
+

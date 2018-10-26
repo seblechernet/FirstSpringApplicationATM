@@ -6,10 +6,14 @@
 </head>
 <body>
 <form  action="#"
-       th:action="@{/withdrawprocess/{id}}"
-       th:object="${account}">
+       th:action="@{/withdrawprocess}"
+       th:object="${account}"
+       method="post"
+
+       >
     Amount:<input type="number" th:field="*{amount}">
     <input type="submit" value="Done">
+
 </form>
 </body>
 </html>

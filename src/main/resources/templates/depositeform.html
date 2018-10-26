@@ -6,8 +6,9 @@
 </head>
 <body>
 <form  action="#"
-       th:action="@{/displaytransaction/{id}}"
-       th:object="${account}">
+       th:action="@{/depositeprocess}"
+       th:object="${account}"
+       method="post">
     Amount:<input type="number" th:field="*{amount}">
     <input type="submit" value="Done">
 </form>
