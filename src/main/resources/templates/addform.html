@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add form</title>
+</head>
+<body>
+
+<form action="#"
+      th:action="@{/process}"
+      th:object="${account}"
+      method="post">
+    <input typye="hidden" th:field="*{id}" />
+      Account number:<input type="number" th: field="*{accountNumber}" />
+     <span th:if="${#fields.hasErrors('accountNumber')}"
+           th:errors="*{accountNumber}"></span><br />
+
+      Balance:<input type="number" th:field="*{balance}" />
+    <span th:if="${#fields.hasErrors('balance')}"
+          th:errors="*{balance}"></span><br />
+
+      <input type="submit" value="Submit Here">
+</form>
+</body>
+</html>

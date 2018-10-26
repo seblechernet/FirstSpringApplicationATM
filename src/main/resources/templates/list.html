@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of accounts</title>
+</head>
+<body>
+<a href="/add">Add an Acount</a><br />
+
+<table>
+    <tr>
+        <th>Account Number</th>
+        <th>Current Balance</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="account : ${accounts}">
+        <td th:txet="${account.accountNumber}"></td>
+        <td th:txet="${account.balance}"></td>
+        <td>
+            <a th:href="@{/displaytransaction/{id}(id=${account.id})}">Display Transaction</a>
+            <a th:href="@{/withdraw/{id}(id=${account.id})}">Withdraw</a>
+            <a th:href="@{/deposite/{id}(id=${account.id})}">Deposite</a>
+        </td>
+         </tr>
+</table>
+</body>
+</html>
