@@ -10,8 +10,8 @@
       th:action="@{/process}"
       th:object="${account}"
       method="post">
-    <input typye="hidden" th:field="*{id}" />
-      Account number:<input type="number" th: field="*{accountNumber}" />
+    <input type="hidden" th:field="*{id}" />
+      Account number:<input type="number" th:field="*{accountNumber}" />
      <span th:if="${#fields.hasErrors('accountNumber')}"
            th:errors="*{accountNumber}"></span><br />
 

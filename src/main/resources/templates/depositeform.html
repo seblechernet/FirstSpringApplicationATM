@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Deposite</title>
 </head>
 <body>
-
+<form  action="#"
+       th:action="@{/displaytransaction/{id}}"
+       th:object="${account}">
+    Amount:<input type="number" th:field="*{amount}">
+    <input type="submit" value="Done">
+</form>
 
 </body>
 </html>

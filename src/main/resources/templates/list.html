@@ -14,8 +14,8 @@
         <th>Actions</th>
     </tr>
     <tr th:each="account : ${accounts}">
-        <td th:txet="${account.accountNumber}"></td>
-        <td th:txet="${account.balance}"></td>
+        <td th:text="${account.accountNumber}"></td>
+        <td th:text="${account.balance}"></td>
         <td>
             <a th:href="@{/displaytransaction/{id}(id=${account.id})}">Display Transaction</a>
             <a th:href="@{/withdraw/{id}(id=${account.id})}">Withdraw</a>

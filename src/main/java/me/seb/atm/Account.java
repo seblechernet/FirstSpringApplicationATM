@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,12 +17,17 @@ public class Account {
     private long id;
 
     @NotNull
-    @Size(min=4)
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(1000)
     private long accountNumber;
 
     @NotNull
     @NumberFormat(pattern="#.##")
     private double balance;
+
+    @NotNull
+    @NumberFormat(pattern="#.##")
+    private double amount;
 
 
     public long getId() {
@@ -40,13 +46,19 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public double getAmount() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setAmount(double amount) {
-        this.balance = amount;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
+    public double getAmount() {
+        return amount;
+    }
 
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 }
