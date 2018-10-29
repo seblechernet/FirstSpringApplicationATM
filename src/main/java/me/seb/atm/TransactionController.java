@@ -16,8 +16,7 @@ import javax.websocket.server.PathParam;
 public class TransactionController {
     @Autowired
     AccountRepository accountRepository;
-    @Autowired
-    Accountservice accountservice;
+
 
     @RequestMapping("/")
     public String homePage(Model model){
@@ -52,13 +51,15 @@ public class TransactionController {
         model.addAttribute("account", accountRepository.findById(id));
         return "withdrawalform";
     }
-    @PostMapping("/withdrawprocess")
-    public String processwithdraw(Account account, double amount, Model model){
+    @PostMapping("/withdrawprocess/{id}")
+    public String processwithdraw( @PathVariable ("id") long id, Account account,  double amount,  Model model){
 
+        model.addAttribute("account", accountRepository.findById(id).get());
         model.addAttribute("amount",amount);
         account.setAmount(amount);
         double balance=(account.getBalance()-account.getAmount());
         account.setBalance(balance);
+
            return "redirect:/";
     }
 
@@ -74,6 +75,7 @@ public class TransactionController {
         account.setAmount(amount);
         double balance=(account.getBalance()+account.getAmount());
         account.setBalance(balance);
+
         return "redirect:/";
     }
     }
